@@ -9,12 +9,12 @@ import cv2
 import numpy
 import math
 
+
 class MyProcess(object):
     """
-    文件路径在__init__中进行初始化
-    in_read中读入
-    split中进行分离
-    out_read中读出
+    File path is initialized in __init__()
+  Achieve the function one will use Dimension_file(), split()
+  Achieve the function two will use read_file(), psnr()
     """
     def __init__(self, path1, path2, ftype):
         self.path1 = path1
@@ -23,7 +23,7 @@ class MyProcess(object):
     
     def dimension_file(self):
         """
-        得到Raw.ome.tif 的维度信息
+        Get the dimension information of Raw.ome.tif
         return:
            data1:[C, Z, T]
            data2:[Width, Height]
@@ -31,7 +31,7 @@ class MyProcess(object):
         in_file_path = self.path1
         command = r'Ometiff.exe -i -s '+in_file_path
         cmd = os.popen(command,'r',1)
-        # 使用os.popen可以得到cmd中的返回值,保存在out里
+        # Use os.popen to get the return value in cmd, save it in out
         out = cmd.read()
         # [C, Z, T]'s info
         index1 = out.split("[")[2].split("]")[0]
@@ -39,21 +39,21 @@ class MyProcess(object):
         index2 = out.split("[")[4].split("]")[0]
         data1 = list(map(lambda x:int(x), index1.split(",")))
         data2 = list(map(lambda x:int(x), index2.split(",")))
-        print("该文件[C, Z, T] = " + str(data1) + ", [Width, Height] = " + str(data2))
+        print("This file:[C, Z, T] = " + str(data1) + ", [Width, Height] = " + str(data2))
         return data1, data2
 
     def split(self, data1):
         """
-        调用ometiff.exe
+        Call ometiff.exe
         param: data1--[C, Z, T]
         return: Null
         """
         in_file_path = self.path1
         out_file_path = self.path2
         ftype = self.ftype
-        # 程序从30开始读取图片
+        # The program reads pictures from 30
         bias = 30
-        # 目前扫描第0片, 如果扫描所有片，下面一行可以注释掉
+        # Currently scan the 0th slice, if you scan all the slices, the next line can be commented out
         data1[1] = 1
         for j in range(data1[1]):
             for k in range(bias, data1[2]+bias):
@@ -63,11 +63,10 @@ class MyProcess(object):
 
     def read_file(self):
         """
-        读入path1和path2 中，所有的ftype类型的文件路径索引，
-        保存到img1和img2中
-        :return:
-        img1 - path1目录下所有.ftype的文件路径索引的list
-        img2 - path2目录下所有.ftype的文件路径索引的list
+        The function reads into path1 and path2, and all file path indexes of type "ftype" are saved to img1 and img2.
+    :return:
+    img1 - a list of all ".ftype" file path indexes in the path1 directory
+    img2 - list of all ".ftype" file path indexes in the path2 directory
         """
         path1 = self.path1
         path2 = self.path2
@@ -78,10 +77,10 @@ class MyProcess(object):
 
     def psnr(self, img1, img2):
         """
-        计算两幅图像的psnr
-        :param img1: 图一路径
-        :param img2: 图二路径
-        :return: 两幅图像的psnr数值
+        Calculate the psnr of the two images
+    param img1: Figure 1 path
+    param img2: Figure 2 path
+    return: psnr value of two images
         """
         original = cv2.imread(img1)
         contrast = cv2.imread(img2)
