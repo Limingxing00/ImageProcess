@@ -82,10 +82,15 @@ class MyProcess(object):
     param img2: Figure 2 path
     return: psnr value of two images
         """
-        original = cv2.imread(img1, cv2.IMREAD_GRAYSCALE)
-        contrast = cv2.imread(img2, cv2.IMREAD_GRAYSCALE)
-        float32_original = original.astype(np.float32)
-        float32_contrast = contrast.astype(np.float32)
+        ftype = self.ftype
+        if ftype == "jpg":
+            original = cv2.imread(img1, cv2.IMREAD_GRAYSCALE)
+            contrast = cv2.imread(img2, cv2.IMREAD_GRAYSCALE)
+        elif ftype == "tiff":
+            original = cv2.imread(img1, -1)
+            contrast = cv2.imread(img2, -1)
+        float32_original = original.astype(np.float64)
+        float32_contrast = contrast.astype(np.float64)
         diff = cv2.absdiff(float32_contrast, float32_original)
         mse = np.mean(diff ** 2)
         
