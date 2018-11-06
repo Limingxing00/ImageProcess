@@ -1,6 +1,7 @@
 # ImageProcess
 
 c8.py 
+
 There are now two functions: 
 1. Extracting the sequence of images from the 4D data; 
 2. Calculating the psnr of all the types of pictures in both directories.
@@ -15,5 +16,7 @@ Currently only my collaborators can use function one, and some things are not up
 
 
 2018/11/6
+
 update c12.py
+
  the batch of 16-bit img clears their last 4-bit to zeros
