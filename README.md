@@ -16,7 +16,6 @@ Currently only my collaborators can use function one, and some things are not up
 
 
 2018/11/6
-
 update c12.py
 
  the batch of 16-bit img clears their last 4-bit to zeros
