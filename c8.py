@@ -92,7 +92,7 @@ class MyProcess(object):
         if mse == 0:
             return 100
         else:
-            PIXEL_MAX = 65535.0
+            PIXEL_MAX = 255.0
             return 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
 
     def psnr_16bit(self, img1, img2):
