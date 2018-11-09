@@ -5,6 +5,7 @@ c8.py
 There are now two functions: 
 1. Extracting the sequence of images from the 4D data; 
 2. Calculating the psnr of all the types of pictures in both directories.
+
   2.1 if you want to use it on 8-bit img, please use psnr_8bit.
   2.2 if you want to use it on 16-bit img, please use psnr_16bit.
 
