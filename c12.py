@@ -29,13 +29,7 @@ def img16_to_img12(img):
     :return: img:  16-bit picture after reduction of last 4 bits
     """
     Width, Hight = img.shape
-    for i in range(Width):
-        for j in range(Hight):
-            bin_var = bin(img[i, j])
-            # Condition: only the binary length is greater than 4, and the last four digits are not "0000"
-            if bin_var[-4:] != "0000" and len(bin_var) > 6:
-                # Int's maximum is 2^32-1, uint16 will not overflow
-                img[i, j] = int(bin_var[:-4]+str("0000"), 2)
+    img = np.bitwise_and(img, 0xfff0)
     return img 
 
 # =============================================================================
