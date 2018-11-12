@@ -8,6 +8,7 @@ import glob
 import cv2
 import numpy
 import math
+from subprocess import run
 
 
 class MyProcess(object):
@@ -59,7 +60,7 @@ class MyProcess(object):
             for k in range(bias, data1[2]+bias):
                 command = 'Ometiff.exe -s '+in_file_path+' -o '+out_file_path+'\%05d.' % (j*data1[2]+k-bias)+ftype + \
                           ' -d 0,'+str(j)+','+str(k)
-                os.popen(command,'r')
+                run(command)
 
     def read_file(self):
         """
