@@ -105,9 +105,9 @@ class MyProcess(object):
         """
         original = cv2.imread(img1, -1)
         contrast = cv2.imread(img2, -1)
-        float32_original = original.astype(np.float64)
-        float32_contrast = contrast.astype(np.float64)
-        diff = cv2.absdiff(float32_contrast, float32_original)
+        float64_original = original.astype(np.float64)
+        float64_contrast = contrast.astype(np.float64)
+        diff = cv2.absdiff(float64_contrast, float64_original)
         mse = np.mean(diff ** 2)
         if mse == 0:
             return 100
